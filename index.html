@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="card">
+          <h1 :style="{
+            color: inputValue.length < 5 ? 'green' : 'red',
+            fontSize: inputValue.length < 5 ? '1rem' : '2rem'
+        }">{{ title }}</h1>
+    <div class="Form-control">
+       <input 
+       type="text"
+        :placeholder="placeholderString"
+    
+        v-model="inputValue"
+        @keydown.enter="addHandler"
+         />
+    </div>
+  
+    <button class="btn" @click="addHandler">Добавить</button>
+    <hr/>
+    <ul class="list" v-if="notes.length !== 0">
+      <li class="list-item" v-for="(note, idx) in notes">
+        <!-- <span :class="note.length > 5 ? 'primary' : 'bold'">({{ idx + 1 }}){{ toUpperCase(note) }}</span> -->
+        
+        <!-- <span :class="{
+         'primary' : true, 
+         'bold': note.length > 5
+      }">({{ idx + 1 }}) {{ toUpperCase(note) }}</span> -->
+      <span class="['primary', 'bold'][note.length > 5]">({{ idx + 1 }}) {{ toUpperCase(note) }}']</span>
+        
+        <button class="btn1 danger" @click="removeNote(idx)">удалить</button>
+      </li>
+      <hr>
+      <li>
+        <strong>Общее кол-во заметок: {{ notes.length }}</strong> | Удвоенно: {{ doubleCountComputed }}
+      </li>
+    </ul>
+    <div v-if="notes.length === 0">Список пуст добавь заметку</div></div>
+        </div>
+      </div>
+    
+      <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+      <script src="app.js"></script>
+</body>
+</html>
